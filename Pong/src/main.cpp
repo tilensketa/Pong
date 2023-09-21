@@ -13,11 +13,13 @@
 #include "EBO.h"
 #include "Camera.h"
 
+#include "Quad.h"
+
 
 int main() {
 
     uint32_t HEIGHT = 640;
-    uint32_t WIDTH = 640;
+    uint32_t WIDTH = 840;
 
     // Vertices coordinates
     GLfloat vertices[] =
@@ -61,25 +63,15 @@ int main() {
 
     Shader shaderProgram("Shaders/default.vert", "Shaders/default.frag");
 
-    VAO VAO1;
-    VAO1.Bind();
-
-    VBO VBO1(vertices, sizeof(vertices));
-    EBO EBO1(indices, sizeof(indices));
-
-    VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-    VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-
-    VAO1.Unbind();
-    VBO1.Unbind();
-    EBO1.Unbind();
-
     // Texture
-    Texture brick("Textures/brick_wall.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+    Texture brick("Textures/circle.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_UNSIGNED_BYTE);
     brick.texUnit(shaderProgram, "tex0", 0);
 
+    Quad quad(0.5f, 0.5f, brick);
+
     Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, -0.5f, -2.0f));
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // GL_FILL / GL_LINE
 
     double prevTime = 0.0f;
     // Loop until the user closes the window
@@ -94,17 +86,15 @@ int main() {
             glfwSetWindowShouldClose(window, true);
 
         // Clear color
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         shaderProgram.Activate();
 
-        camera.Inputs(window, delta);
-        camera.Matrix(0.1f, 100.0f, shaderProgram, "camMatrix");
+        camera.Inputs(window, (float)delta);
+        camera.Matrix(shaderProgram, "camMatrix");
 
-        brick.Bind();
-        VAO1.Bind();
-        glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, 0);
+        quad.Draw(shaderProgram, camera);
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
@@ -113,9 +103,6 @@ int main() {
         glfwPollEvents();
     }
     // Delete everything
-    VAO1.Delete();
-    VBO1.Delete();
-    EBO1.Delete();
     shaderProgram.Delete();
     brick.Delete();
 

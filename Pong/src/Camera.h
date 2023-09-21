@@ -9,7 +9,7 @@ class Camera {
 public:
 	Camera(int width, int height, glm::vec3 position);
 
-	void Matrix(float nearPlane, float farPlane, Shader& shader, const char* uniform);
+	void Matrix(Shader& shader, const char* uniform);
 	void Inputs(GLFWwindow* window, float ts);
 
 	glm::vec3 m_Position;

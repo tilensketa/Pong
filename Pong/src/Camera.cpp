@@ -8,12 +8,12 @@ Camera::Camera(int width, int height, glm::vec3 position)
 	m_AspectRatio = (float)m_Width / m_Height;
 }
 
-void Camera::Matrix(float nearPlane, float farPlane, Shader& shader, const char* uniform) {
+void Camera::Matrix(Shader& shader, const char* uniform) {
 	glm::mat4 model = glm::mat4(1.0f);
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 proj = glm::mat4(1.0f);
 
-	proj = glm::ortho(-m_AspectRatio, m_AspectRatio, -1.0f, 1.0f, nearPlane, farPlane);
+	proj = glm::ortho(-m_AspectRatio, m_AspectRatio, -1.0f, 1.0f, 0.1f, 100.0f);
 	view = glm::translate(model, m_Position);
 
 	int location = glGetUniformLocation(shader.ID, uniform);
