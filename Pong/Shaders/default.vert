@@ -7,10 +7,13 @@ out vec3 color;
 out vec2 texCoord;
 
 uniform mat4 camMatrix;
+uniform mat4 modelMatrix;
 
 void main()
 {
-   gl_Position = camMatrix * vec4(aPos, 1.0f);
-   color = aColor;
-   texCoord = aTex;
+	vec4 modelPosition = modelMatrix * vec4(aPos, 1.0);
+	vec4 viewPosition = camMatrix * modelPosition;
+	gl_Position = viewPosition;
+	color = aColor;
+	texCoord = aTex;
 }

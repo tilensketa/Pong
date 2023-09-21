@@ -14,26 +14,12 @@
 #include "Camera.h"
 
 #include "Quad.h"
-
+#include "Player.h"
 
 int main() {
 
-    uint32_t HEIGHT = 640;
-    uint32_t WIDTH = 840;
-
-    // Vertices coordinates
-    GLfloat vertices[] =
-    {
-        -0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,     0.0f, 0.0f,
-        -0.5f,  0.5f, 0.0f,     0.0f, 1.0f, 0.0f,     0.0f, 1.0f,
-         0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 1.0f,     1.0f, 1.0f,
-         0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,     1.0f, 0.0f
-    };
-
-    GLuint indices[] = {
-        0, 1, 2,
-        0, 2, 3
-    };
+    uint32_t HEIGHT = 500;
+    uint32_t WIDTH = 800;
 
 #pragma region Initialize GLFW and glad
     // GLFW initialization
@@ -64,12 +50,10 @@ int main() {
     Shader shaderProgram("Shaders/default.vert", "Shaders/default.frag");
 
     // Texture
-    Texture brick("Textures/circle.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_UNSIGNED_BYTE);
-    brick.texUnit(shaderProgram, "tex0", 0);
-
-    Quad quad(0.5f, 0.5f, brick);
-
-    Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, -0.5f, -2.0f));
+    Texture background("Textures/background.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_UNSIGNED_BYTE);
+    Quad backgroundQuad(3.0f, 2.0f, background);
+    Player player(0.1f, 0.5f);
+    Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, -5.0f));
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // GL_FILL / GL_LINE
 
@@ -86,7 +70,7 @@ int main() {
             glfwSetWindowShouldClose(window, true);
 
         // Clear color
-        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         shaderProgram.Activate();
@@ -94,7 +78,10 @@ int main() {
         camera.Inputs(window, (float)delta);
         camera.Matrix(shaderProgram, "camMatrix");
 
-        quad.Draw(shaderProgram, camera);
+        backgroundQuad.Draw(shaderProgram, camera);
+
+        player.Input(window, (float)delta);
+        player.Draw(shaderProgram, camera);
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
@@ -104,7 +91,7 @@ int main() {
     }
     // Delete everything
     shaderProgram.Delete();
-    brick.Delete();
+    //brick.Delete();
 
     glfwDestroyWindow(window);
 

@@ -2,6 +2,9 @@
 
 #include "EBO.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 Quad::Quad(float width, float height, const Texture& texture)
 	: m_Width(width), m_Height(height) {
 	m_Vertices.resize(4);
@@ -54,5 +57,12 @@ void Quad::Draw(Shader& shader, Camera& camera) {
 	glUniform3f(glGetUniformLocation(shader.ID, "camPos"), camera.m_Position.x, camera.m_Position.y, camera.m_Position.z);
 	camera.Matrix(shader, "camMatrix");
 
+	glm::mat4 modelMatrix = glm::translate(glm::mat4(1.0f), m_Position);
+	glUniformMatrix4fv(glGetUniformLocation(shader.ID, "modelMatrix"), 1, GL_FALSE, glm::value_ptr(modelMatrix));
+
 	glDrawElements(GL_TRIANGLES, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, 0);
+}
+
+void Quad::Move(const glm::vec3 position) {
+	m_Position = position;
 }

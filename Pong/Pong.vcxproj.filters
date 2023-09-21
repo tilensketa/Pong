@@ -33,6 +33,7 @@
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Quad.h" />
     <ClInclude Include="src\Vertex.h" />
+    <ClInclude Include="src\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EBO.cpp">
@@ -58,5 +59,6 @@
     </ClCompile>
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Quad.cpp" />
+    <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
 </Project>
