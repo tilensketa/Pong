@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Quad::Quad(float width, float height, const Texture& texture)
+Quad::Quad(float width, float height, float x, float y, const Texture& texture)
 	: m_Width(width), m_Height(height) {
 	m_Vertices.resize(4);
 	m_Vertices[0] = Vertex(glm::vec3(-m_Width / 2, -m_Height / 2, 0.0f), glm::vec2(0.0f, 0.0f));
@@ -24,9 +24,11 @@ Quad::Quad(float width, float height, const Texture& texture)
 	VAO.Unbind();
 	VBO.Unbind();
 	EBO.Unbind();
+
+	SetPosition(glm::vec3(x, y, 0));
 }
 
-Quad::Quad(float width, float height)
+Quad::Quad(float width, float height, float x, float y)
 	: m_Width(width), m_Height(height) {
 	m_Vertices.resize(4);
 	m_Vertices[0] = Vertex(glm::vec3(-m_Width / 2, -m_Height / 2, 0.0f), glm::vec2(0.0f, 0.0f));
@@ -45,6 +47,8 @@ Quad::Quad(float width, float height)
 	VAO.Unbind();
 	VBO.Unbind();
 	EBO.Unbind();
+
+	SetPosition(glm::vec3(x, y, 0));
 }
 
 void Quad::Draw(Shader& shader, Camera& camera) {
@@ -63,6 +67,6 @@ void Quad::Draw(Shader& shader, Camera& camera) {
 	glDrawElements(GL_TRIANGLES, (GLsizei)m_Indices.size(), GL_UNSIGNED_INT, 0);
 }
 
-void Quad::Move(const glm::vec3 position) {
+void Quad::SetPosition(const glm::vec3 position) {
 	m_Position = position;
 }

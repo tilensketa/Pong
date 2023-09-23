@@ -11,11 +11,12 @@
 class Quad {
 public:
 	Quad() = default;
-	Quad(float width, float height, const Texture& texture);
-	Quad(float width, float height);
+	Quad(float width, float height, float x, float y, const Texture& texture);
+	Quad(float width, float height, float x, float y);
 
 	void Draw(Shader& shader, Camera& camera);
-	void Move(const glm::vec3 position);
+	void SetPosition(const glm::vec3 position);
+
 private:
 	glm::vec3 m_Position = glm::vec3(0.0f);
 	float m_Width, m_Height;

@@ -6,15 +6,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <spdlog/spdlog.h>
 
-#include "Texture.h"
-#include "Shader.h"
-#include "VAO.h"
-#include "VBO.h"
-#include "EBO.h"
-#include "Camera.h"
-
-#include "Quad.h"
 #include "Player.h"
+#include "Ball.h"
+
+#include "Collision.h"
 
 int main() {
 
@@ -51,8 +46,11 @@ int main() {
 
     // Texture
     Texture background("Textures/background.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_UNSIGNED_BYTE);
-    Quad backgroundQuad(3.0f, 2.0f, background);
-    Player player(0.1f, 0.5f);
+    Quad backgroundQuad(4.0f, 2.0f, 0.0f, 0.0f, background);
+
+    Player player(0.1f, 0.5f, 1.5f, 0.0f);
+    Ball ball(0.1f, 0.1f, 0.0f, 0.0f);
+
     Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, -5.0f));
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); // GL_FILL / GL_LINE
@@ -81,7 +79,17 @@ int main() {
         backgroundQuad.Draw(shaderProgram, camera);
 
         player.Input(window, (float)delta);
+        ball.Move((float)delta);
+        if (BallPlayerCollision(ball.GetAABB(), player.GetAABB())) {
+            glm::vec2 dir = ball.GetDirection();
+            float x = std::rand();
+            float y = std::rand();
+            dir = glm::vec2(-x, y);
+            dir = glm::normalize(dir);
+            ball.SetDirection(dir.x, dir.y);
+        }
         player.Draw(shaderProgram, camera);
+        ball.Draw(shaderProgram, camera);
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
