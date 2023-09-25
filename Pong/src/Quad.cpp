@@ -5,8 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Quad::Quad(float width, float height, float x, float y, const Texture& texture)
-	: m_Width(width), m_Height(height) {
+Quad::Quad(glm::vec2 position, glm::vec2 size, const Texture& texture)
+	: m_Width(size.x), m_Height(size.y), m_Position(glm::vec3(position, 0.0f)) {
 	m_Vertices.resize(4);
 	m_Vertices[0] = Vertex(glm::vec3(-m_Width / 2, -m_Height / 2, 0.0f), glm::vec2(0.0f, 0.0f));
 	m_Vertices[1] = Vertex(glm::vec3(-m_Width / 2, m_Height / 2, 0.0f), glm::vec2(0.0f, 1.0f));
@@ -24,12 +24,10 @@ Quad::Quad(float width, float height, float x, float y, const Texture& texture)
 	VAO.Unbind();
 	VBO.Unbind();
 	EBO.Unbind();
-
-	SetPosition(glm::vec3(x, y, 0));
 }
 
-Quad::Quad(float width, float height, float x, float y)
-	: m_Width(width), m_Height(height) {
+Quad::Quad(glm::vec2 position, glm::vec2 size)
+	: m_Width(size.x), m_Height(size.y), m_Position(glm::vec3(position, 0.0f)) {
 	m_Vertices.resize(4);
 	m_Vertices[0] = Vertex(glm::vec3(-m_Width / 2, -m_Height / 2, 0.0f), glm::vec2(0.0f, 0.0f));
 	m_Vertices[1] = Vertex(glm::vec3(-m_Width / 2, m_Height / 2, 0.0f), glm::vec2(0.0f, 1.0f));
@@ -47,8 +45,6 @@ Quad::Quad(float width, float height, float x, float y)
 	VAO.Unbind();
 	VBO.Unbind();
 	EBO.Unbind();
-
-	SetPosition(glm::vec3(x, y, 0));
 }
 
 void Quad::Draw(Shader& shader, Camera& camera) {

@@ -4,13 +4,14 @@
 #include <glm/glm.hpp>
 
 #include "Shader.h"
+#include "InputSystem.h"
 
 class Camera {
 public:
 	Camera(int width, int height, glm::vec3 position);
 
 	void Matrix(Shader& shader, const char* uniform);
-	void Inputs(GLFWwindow* window, float ts);
+	void Inputs(InputSystem input, float ts);
 
 	glm::vec3 m_Position;
 

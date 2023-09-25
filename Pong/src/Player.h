@@ -5,13 +5,14 @@
 
 #include "Quad.h"
 #include "AABB.h"
+#include "InputSystem.h"
 
 class Player {
 public:
-	Player(float width, float height, float x, float y);
+	Player(glm::vec2 position, glm::vec2 size, int player);
 
 	void Draw(Shader& shader, Camera& camera);
-	void Input(GLFWwindow* window, float ts);
+	void Input(float height, InputSystem input, float ts);
 
 	void SetPosition(float x, float y);
 
@@ -21,8 +22,10 @@ private:
 	AABB CreateAABB();
 private:
 	glm::vec3 m_Position = glm::vec3(0.0f);
-	float m_Speed = 2.0f;
+	float m_Speed = 300.0f;
 	Quad m_Quad;
 	float m_Width, m_Height;
 	AABB m_AABB;
+
+	int m_Player;
 };
