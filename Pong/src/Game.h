@@ -3,6 +3,7 @@
 #include "RenderSystem.h"
 #include "InputSystem.h"
 #include "ScoreSystem.h"
+#include "SoundSystem.h"
 #include "Camera.h"
 #include "Player.h"
 #include "Ball.h"
@@ -21,6 +22,7 @@ private:
 	RenderSystem* m_RenderSystem = nullptr;
 	InputSystem* m_InputSystem = nullptr;
 	ScoreSystem* m_ScoreSystem = nullptr;
+	SoundSystem* m_SoundSystem = nullptr;
 
 	Camera* m_Camera = nullptr;
 	Player* m_Player1 = nullptr;

@@ -57,7 +57,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>vendor\glad\include;vendor\GLFW\include;vendor\glm;vendor\spdlog\include;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\glad\include;vendor\GLFW\include;vendor\glm;vendor\spdlog\include;vendor\stb;vendor\irrKlang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
@@ -65,15 +65,15 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\GLFW\lib-vc2022;vendor\irrKlang\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>vendor\glad\include;vendor\GLFW\include;vendor\glm;vendor\spdlog\include;vendor\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor\glad\include;vendor\GLFW\include;vendor\glm;vendor\spdlog\include;vendor\stb;vendor\irrKlang\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -85,8 +85,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>vendor\GLFW\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>vendor\GLFW\lib-vc2022;vendor\irrKlang\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -102,6 +102,7 @@
     <ClInclude Include="src\RenderSystem.h" />
     <ClInclude Include="src\ScoreSystem.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\SoundSystem.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\Utils.h" />
     <ClInclude Include="src\VAO.h" />
@@ -120,6 +121,7 @@
     <ClCompile Include="src\RenderSystem.cpp" />
     <ClCompile Include="src\ScoreSystem.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\SoundSystem.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\VAO.cpp" />
     <ClCompile Include="src\VBO.cpp" />

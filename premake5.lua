@@ -28,16 +28,19 @@ project "Pong"
         "%{prj.name}/vendor/GLFW/include",
         "%{prj.name}/vendor/glm",
         "%{prj.name}/vendor/spdlog/include",
-        "%{prj.name}/vendor/stb"
+        "%{prj.name}/vendor/stb",
+        "%{prj.name}/vendor/irrKlang/include"
     }
 
     libdirs {
-        "%{prj.name}/vendor/GLFW/lib-vc2022"
+        "%{prj.name}/vendor/GLFW/lib-vc2022",
+        "%{prj.name}/vendor/irrKlang/lib",
     }
 
     links {
         "glfw3.lib",
-        "opengl32.lib"
+        "opengl32.lib",
+        "irrKlang.lib"
     }
 
     filter "configurations:Debug"

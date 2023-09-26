@@ -3,6 +3,7 @@
 #include "Collision.h"
 #include "Utils.h"
 
+#include <irrKlang/irrKlang.h>
 #include <spdlog/spdlog.h>
 
 Game::Game(int width, int height)
@@ -11,6 +12,7 @@ Game::Game(int width, int height)
 	m_RenderSystem = new RenderSystem;
 	m_InputSystem = new InputSystem;
 	m_ScoreSystem = new ScoreSystem;
+	m_SoundSystem = new SoundSystem;
 }
 
 void Game::Init() {
@@ -21,6 +23,7 @@ void Game::Init() {
 	m_InputSystem->Init();
 	m_InputSystem->SetWindow(m_RenderSystem->GetWindow());
 	m_ScoreSystem->Init();
+	m_SoundSystem->Init();
 
 	// Create players
 	glm::vec2 playerSize = glm::vec2(20.0f, 100.0f);
@@ -37,8 +40,6 @@ void Game::Init() {
 	m_Background = new Quad(glm::vec2(0.0f), glm::vec2(m_WindowWidth, m_WindowHeight), background);
 
 	m_Camera = m_RenderSystem->GetCamera();
-
-	//m_ScoreText->Init();
 }
 
 void Game::Run() {
@@ -68,11 +69,13 @@ void Game::Run() {
 			glm::vec2 dir = glm::vec2(1.0f, Random::Float(-1.0f, 1.0f));
 		    dir = glm::normalize(dir);
 		    m_Ball->SetDirection(dir);
+			m_SoundSystem->PlaySound(m_SoundSystem->blip);
 		}
 		else if (BallPlayerCollision(m_Ball->GetAABB(), m_Player2->GetAABB())) {
 			glm::vec2 dir = glm::vec2(-1.0f, Random::Float(-1.0f, 1.0f));
 		    dir = glm::normalize(dir);
 			m_Ball->SetDirection(dir);
+			m_SoundSystem->PlaySound(m_SoundSystem->blip);
 		}
 
 		// Handle scoring
@@ -81,12 +84,14 @@ void Game::Run() {
 			m_Ball->SetPosition(glm::vec2(0.0f));
 			glm::vec2 dir = Random::Vec2(-1.0f, 1.0f);
 			m_Ball->SetDirection(dir);
+			m_SoundSystem->PlaySound(m_SoundSystem->score);
 		}
 		else if (m_Ball->GetPosition().x - m_Ball->GetSize().x < - (float)m_WindowWidth / 2) {
 			m_ScoreSystem->AddScore(2);
 			m_Ball->SetPosition(glm::vec2(0.0f));
 			glm::vec2 dir = Random::Vec2(-1.0f, 1.0f);
 			m_Ball->SetDirection(dir);
+			m_SoundSystem->PlaySound(m_SoundSystem->score);
 		}
 
 		// Draw sprites

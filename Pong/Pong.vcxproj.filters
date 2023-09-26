@@ -51,9 +51,6 @@
     <ClInclude Include="src\Shader.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Text.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Texture.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Shader.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Text.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture.cpp">
