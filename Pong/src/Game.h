@@ -18,9 +18,9 @@ public:
 private:
 	int m_WindowWidth, m_WindowHeight;
 
-	RenderSystem* m_RenderSystem;
-	InputSystem* m_InputSystem;
-	ScoreSystem* m_ScoreSystem;
+	RenderSystem* m_RenderSystem = nullptr;
+	InputSystem* m_InputSystem = nullptr;
+	ScoreSystem* m_ScoreSystem = nullptr;
 
 	Camera* m_Camera = nullptr;
 	Player* m_Player1 = nullptr;

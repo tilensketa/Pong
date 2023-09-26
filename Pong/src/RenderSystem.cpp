@@ -12,6 +12,7 @@ void RenderSystem::Init() {
 	// Initialize GLFW and Glad
 	if (!glfwInit())
 		spdlog::critical("GLFW failed to initialize!");
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 	m_Window = glfwCreateWindow(m_Width, m_Height, "PONG", nullptr, nullptr);
 	if (!m_Window) {
 		spdlog::critical("Failed to initialize GLFW window");
@@ -39,13 +40,11 @@ void RenderSystem::Render() {
 
 	m_Camera->Matrix(*m_Shader, "camMatrix");
 
-
-
-
 	//glfwSwapBuffers(m_Window);
 }
 
 void RenderSystem::Close() {
+	spdlog::info("Closing RenderSystem");
 	glfwWindowShouldClose(m_Window);
 	m_Shader->Delete();
 	glfwDestroyWindow(m_Window);

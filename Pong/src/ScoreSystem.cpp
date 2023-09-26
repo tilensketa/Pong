@@ -24,6 +24,7 @@ void ScoreSystem::AddScore(int player) {
 }
 
 void ScoreSystem::Close() {
+	spdlog::info("Closing ScoreSystem");
 	m_PlayerScore1 = 0;
 	m_PlayerScore2 = 0;
 }

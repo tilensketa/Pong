@@ -15,11 +15,11 @@ public:
 	Quad(glm::vec2 position, glm::vec2 size);
 
 	void Draw(Shader& shader, Camera& camera);
-	void SetPosition(const glm::vec3 position);
+	void SetPosition(const glm::vec2 position);
 
 private:
-	glm::vec3 m_Position = glm::vec3(0.0f);
-	float m_Width, m_Height;
+	glm::vec2 m_Position = glm::vec2(0.0f);
+	glm::vec2 m_Size = glm::vec2(10.0f, 10.0f);
 	std::vector<Vertex> m_Vertices;
 	std::vector<uint32_t> m_Indices = {
 		0, 1, 2,

@@ -45,10 +45,19 @@
     <ClInclude Include="src\RenderSystem.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\ScoreSystem.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Shader.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Text.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Texture.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\VAO.h">
@@ -89,7 +98,13 @@
     <ClCompile Include="src\RenderSystem.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ScoreSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Shader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Text.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture.cpp">
@@ -99,9 +114,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\VBO.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\src\glad.c">

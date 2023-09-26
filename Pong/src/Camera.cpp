@@ -5,7 +5,7 @@
 
 Camera::Camera(int width, int height, glm::vec3 position)
 	: m_Width(width), m_Height(height), m_Position(position) {
-	m_AspectRatio = (float)m_Width / m_Height;
+	m_AspectRatio = (float)m_Width / (float)m_Height;
 }
 
 void Camera::Matrix(Shader& shader, const char* uniform) {

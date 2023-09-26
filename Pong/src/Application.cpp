@@ -1,7 +1,7 @@
 #include "Game.h"
 
 int main() {
-	Game game(1000, 600);
+	Game game(800, 600);
 	game.Init();
 	game.Run();
 	game.Close();

@@ -14,17 +14,17 @@ public:
 	void Draw(Shader& shader, Camera& camera);
 	void Input(float height, InputSystem input, float ts);
 
-	void SetPosition(float x, float y);
+	void SetPosition(const glm::vec2& position);
 
 	const AABB& GetAABB() { return m_AABB; }
-	const glm::vec2& GetPosition() { return glm::vec2(m_Position.x, m_Position.y); }
+	const glm::vec2& GetPosition() { return m_Position; }
 private:
 	AABB CreateAABB();
 private:
-	glm::vec3 m_Position = glm::vec3(0.0f);
+	glm::vec2 m_Position = glm::vec2(0.0f);
+	glm::vec2 m_Size;
 	float m_Speed = 300.0f;
 	Quad m_Quad;
-	float m_Width, m_Height;
 	AABB m_AABB;
 
 	int m_Player;

@@ -11,5 +11,5 @@ void InputSystem::Update() {
 }
 
 void InputSystem::Close() {
-	
+	spdlog::info("Closing InputSystem");
 }
